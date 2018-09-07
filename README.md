@@ -100,11 +100,18 @@ git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
 > Dropbox is available cross platform including Windows, Mac, Linux, iOS and Android. Because Org files are plain text, the files open with any available text editor. There are also mobile apps to manage Org files.
 * Webdav
 
+## Web browser extensions
+
+* [Org Capture Extension - Github](https://github.com/sprig/org-capture-extension)
+* [Org Capture - Chrome](https://chrome.google.com/webstore/detail/org-capture/kkkjlfejijcjgjllecmnejhogpbcigdc)
+* [Org Captrue - Firefox](https://addons.mozilla.org/en-US/firefox/addon/org-capture/)
+
 ## Mobile
 
 * [Beorg](https://beorgapp.com/)
 
 > beorg works with org files which were designed for the amazingly powerful Org mode. Here is an example of a file created by beorg:
+
 ```lisp
 * IN-PROGRESS Move my task management over to beorg and plain text
 ** DONE Check out beorg website
