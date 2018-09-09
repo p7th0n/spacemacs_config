@@ -315,25 +315,55 @@ you should place your code here."
 ;; (setq org-archive-location "::* Archived Tasks")
 (setq org-log-into-drawer "LOGBOOK")
 
-(setq org-capture-templates '( 
-	                            ("w" "Web" entry (file+headline org-default-notes-file "web")
-                               "* %? [[%:link][%:description]]:WEB:\n:PROPERTIES:\n:SOURCE:[%:link] \n:CAPTURED_ON: %U\n:END:\n#+BEGIN_QUOTE\n%i\n#+END_QUOTE\n") 
-	                            ("L" "Link" entry (file+headline org-default-notes-file "link")
-                               "* %? [[%:link][%:description]]:LINK:\n:PROPERTIES:\n:CAPTURED_ON: %U\n:END:\n") 
-                              ("t" "todo" entry (file+headline org-default-notes-file "task")
-                                "* TODO %?\n:PROPERTIES:\n%U\n%a\n:END:\n") 
-                              ("m" "meeting" entry (file+headline org-default-notes-file "meeting")
-                                "* MEETING with %? :MEETING:\n:PROPERTIES:\n%U\n:END:\n") 
-                              ("i" "idea" entry (file+headline org-default-notes-file "idea")
-                               "* %? :IDEA:\n:PROPERTIES:\n%U\n%a\n:END:\n") 
-                              ("n" "note" entry (file+headline org-default-notes-file "note")
-                               "* %? :NOTE:\n:PROPERTIES:\n%U\n%a\n:END:\n") 
-                              ))
-
-;; (setq org-capture-templates '( 
-;;   ("L" "Link" entry (file org-default-notes-file)
-;;   "* %? ") 
-;;   ))
+(setq org-capture-templates
+      '(
+        ("w" "Web" entry
+         (file+headline org-default-notes-file "web")
+          "* %? [[%:link][%:description]]:WEB:\n
+:PROPERTIES:\n
+:SOURCE:[%:link] \n
+:CAPTURED_ON: %U\n
+:END:\n
+#+BEGIN_QUOTE\n
+%i\n
+#+END_QUOTE\n"
+          )
+        ("L" "Link" entry
+         (file+headline org-default-notes-file "link")
+          "* %? [[%:link][%:description]]:LINK:\n
+:PROPERTIES:\n
+:CAPTURED_ON: %U\n
+:END:\n"
+          )
+        ("t" "todo" entry
+         (file+headline org-default-notes-file "task")
+          "* TODO %?\n
+:PROPERTIES:\n
+%U\n%a\n
+:END:\n"
+          )
+        ("m" "meeting" entry
+         (file+headline org-default-notes-file "meeting")
+          "* MEETING with %? :MEETING:\n
+:PROPERTIES:\n
+%U\n
+:END:\n"
+          )
+        ("i" "idea" entry
+         (file+headline org-default-notes-file "idea")
+          "* %? :IDEA:\n
+:PROPERTIES:\n
+%U\n%a\n
+:END:\n"
+          )
+        ("n" "note" entry
+         (file+headline org-default-notes-file "note")
+          "* %? :NOTE:\n
+:PROPERTIES:\n
+%U\n%a\n
+:END:\n"
+          )
+        ))
 
 (setq org-protocol-default-template-key "L")
 
