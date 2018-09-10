@@ -18,6 +18,7 @@ values."
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    '(
+     markdown
      vimscript
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
@@ -27,7 +28,7 @@ values."
      ;; auto-completion
      ;; better-defaults
      emacs-lisp
-     ;; git
+     git
      ;; markdown
      ;; org
      ;; (shell :variables
@@ -270,7 +271,7 @@ you should place your code here."
  '(org-agenda-files (quote ("~/Dropbox/Notes/inbox.org")))
  '(package-selected-packages
    (quote
-    (helm-projectile helm-make projectile pkg-info epl ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-mode-manager helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump diminish define-word column-enforce-mode clean-aindent-mode bracketed-paste auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line))))
+    (mmm-mode markdown-toc markdown-mode gh-md smeargle orgit magit-gitflow helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link evil-magit magit magit-popup git-commit ghub with-editor vimrc-mode dactyl-mode helm-projectile helm-make projectile pkg-info epl ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-mode-manager helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump diminish define-word column-enforce-mode clean-aindent-mode bracketed-paste auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -285,6 +286,9 @@ you should place your code here."
 ;; https://emacs.stackexchange.com/questions/29650/dired-like-browser-for-buffers
 (require 'ibuffer)
 (global-set-key "\C-x\C-b" 'ibuffer)
+(spacemacs/set-leader-keys "mb" 'ibuffer)
+(spacemacs/set-leader-keys "mr" 'org-refile)
+(global-set-key "\C-c o" (find-file "~/Dropbox/Notes/inbox.org"))
 
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-cl" 'org-store-link)
@@ -292,7 +296,17 @@ you should place your code here."
 (global-set-key (kbd "\C-ca") 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
 
-(setq projectile-project-search-path '("~/Documents/git/" "~/Dropbox/dev/git/"))
+(setq helm-ag-base-command "C:\\Users\\Dave\\bin\\ag --vimgrep")
+;; (setq projectile-project-search-path '("~/Documents/git/" "~/Dropbox/dev/git/"))
+;; (setq projectile-known-projects '("~/Documents/git/" "~/Dropbox/dev/git/"))
+
+;; (evil-set-initial-state 'magit-status-mode 'emacs)
+;; (push '("*magit" . emacs) evil-buffer-regexps)
+;; (with-eval-after-load 'magit
+;;   (define-key magit-status-mode-map
+;;     (kbd dotspacemacs-leader-key) spacemacs-default-map))
+
+(setq org-refile-targets '((org-agenda-files . (:maxlevel . 3))))
 
 (setq org-todo-keywords '((sequence 
                            "TODO(t)"
@@ -316,11 +330,24 @@ you should place your code here."
 ;; (setq org-archive-location "::* Archived Tasks")
 (setq org-log-into-drawer "LOGBOOK")
 
+(setq org-tag-persistent-alist
+      '(
+        ("@work" . ?w)
+        ("@home" . ?h)
+        ("computer" . ?c)
+        ("deerhub" . ?d)
+        ("wdma" . ?w)
+        ("urgent" . ?u)
+        ("org" . ?o)
+        ("toread" . ?t)
+        ("resource" . ?r)
+        ))
 (setq org-capture-templates
       '(
         ("w" "Web" entry
          (file+headline org-default-notes-file "web")
-          "* %? [[%:link][%:description]]:WEB:\n
+          "* %? %:description %^G\n
+[[%:link][%:description]]\n
 :PROPERTIES:\n
 :SOURCE:[%:link] \n
 :CAPTURED_ON: %U\n
@@ -329,37 +356,42 @@ you should place your code here."
 %i\n
 #+END_QUOTE\n"
           )
+
         ("L" "Link" entry
          (file+headline org-default-notes-file "link")
-          "* %? [[%:link][%:description]]:LINK:\n
+          "* %? [[%:link][%:description]] %^G\n
 :PROPERTIES:\n
 :CAPTURED_ON: %U\n
 :END:\n"
           )
+
         ("t" "todo" entry
          (file+headline org-default-notes-file "task")
-          "* TODO %?\n
+         "* TODO %? %^G\n
 :PROPERTIES:\n
 %U\n%a\n
 :END:\n"
           )
+
         ("m" "meeting" entry
          (file+headline org-default-notes-file "meeting")
-          "* MEETING with %? :MEETING:\n
+         "* MEETING with %? %^G\n
 :PROPERTIES:\n
 %U\n
 :END:\n"
           )
+
         ("i" "idea" entry
          (file+headline org-default-notes-file "idea")
-          "* %? :IDEA:\n
+          "* %? %^G\n
 :PROPERTIES:\n
 %U\n%a\n
 :END:\n"
           )
+
         ("n" "note" entry
          (file+headline org-default-notes-file "note")
-          "* %? :NOTE:\n
+          "* %? %^G\n
 :PROPERTIES:\n
 %U\n%a\n
 :END:\n"
@@ -375,5 +407,5 @@ you should place your code here."
 (desktop-save-mode 1)
 ;; Set Frame width/height
 (setq default-frame-alist
-      '((top . 25) (left . 275) (width . 105) (height . 60)))
+      '((top . 15) (left . 100) (width . 138) (height . 60)))
 
