@@ -38,10 +38,24 @@ git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
 
 ## org-protocol
 
-* TODO Registry
-* Browser plugins
-    * Quirks
-    * New style protocol [Warning (emacs): Please update your org protocol handler to deal with new-style links. ](https://github.com/alphapapa/org-protocol-capture-html/issues/14), [org-protocol-capture...](https://github.com/alphapapa/org-protocol-capture-html)
+* Registry
+
+```registry
+
+Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\org-protocol]
+@="URL:org-protocol"
+"URL Protocol"=""
+
+[HKEY_CLASSES_ROOT\org-protocol\shell]
+
+[HKEY_CLASSES_ROOT\org-protocol\shell\open]
+
+[HKEY_CLASSES_ROOT\org-protocol\shell\open\command]
+@="\"C:\\usr\\local\\emacs-26.1-x86_64\\bin\\emacsclientw.exe\" \"%1\" "
+
+```
 
 [Version 9.0 notes](https://orgmode.org/Changes_old.html)
 
@@ -80,11 +94,11 @@ git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
 
     ;; Meeting entry
         ("m" "meeting" entry (file+headline org-default-notes-file "meeting")
-        "* MEETING with %? :MEETING:\n:PROPERTIES:\n%U\n:END:\n") 
+        "* MEETING with %? :MEETING:\n:PROPERTIES:\n%U\n:END:\n")
 
     ;; Idea entry
         ("i" "idea" entry (file+headline org-default-notes-file "idea")
-        "* %? :IDEA:\n:PROPERTIES:\n%U\n%a\n:END:\n") 
+        "* %? :IDEA:\n:PROPERTIES:\n%U\n%a\n:END:\n")
 
     ;; Note entry
         ("n" "note" entry (file+headline org-default-notes-file "note")
@@ -105,6 +119,8 @@ git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
 * [Org Capture Extension - Github](https://github.com/sprig/org-capture-extension)
 * [Org Capture - Chrome](https://chrome.google.com/webstore/detail/org-capture/kkkjlfejijcjgjllecmnejhogpbcigdc)
 * [Org Captrue - Firefox](https://addons.mozilla.org/en-US/firefox/addon/org-capture/)
+* In Firefox select emacsclientw.exe as the program to open org-protocol URLs.
+* New style protocol [Warning (emacs): Please update your org protocol handler to deal with new-style links.](https://github.com/alphapapa/org-protocol-capture-html/issues/14), [org-protocol-capture...](https://github.com/alphapapa/org-protocol-capture-html) _in Firefox addons > Org Capture settings > make sure **Use New Style links** is selected.
 
 ## Mobile
 

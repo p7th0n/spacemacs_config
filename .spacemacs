@@ -292,6 +292,7 @@ you should place your code here."
 (global-set-key (kbd "\C-ca") 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
 
+(setq projectile-project-search-path '("~/Documents/git/" "~/Dropbox/dev/git/"))
 
 (setq org-todo-keywords '((sequence 
                            "TODO(t)"
