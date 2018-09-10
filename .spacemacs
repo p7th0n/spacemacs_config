@@ -286,8 +286,11 @@ you should place your code here."
 ;; https://emacs.stackexchange.com/questions/29650/dired-like-browser-for-buffers
 (require 'ibuffer)
 (global-set-key "\C-x\C-b" 'ibuffer)
+
 (spacemacs/set-leader-keys "mb" 'ibuffer)
 (spacemacs/set-leader-keys "mr" 'org-refile)
+(spacemacs/set-leader-keys "oc" 'org-capture)
+
 (global-set-key "\C-c o" (find-file "~/Dropbox/Notes/inbox.org"))
 
 (global-set-key "\C-cc" 'org-capture)
@@ -359,7 +362,7 @@ you should place your code here."
 
         ("L" "Link" entry
          (file+headline org-default-notes-file "link")
-          "* %? [[%:link][%:description]] %^G\n
+          "** %? [[%:link][%:description]] %^G\n
 :PROPERTIES:\n
 :CAPTURED_ON: %U\n
 :END:\n"
@@ -367,7 +370,7 @@ you should place your code here."
 
         ("t" "todo" entry
          (file+headline org-default-notes-file "task")
-         "* TODO %? %^G\n
+         "** TODO %? %^G\n
 :PROPERTIES:\n
 %U\n%a\n
 :END:\n"
@@ -375,7 +378,7 @@ you should place your code here."
 
         ("m" "meeting" entry
          (file+headline org-default-notes-file "meeting")
-         "* MEETING with %? %^G\n
+         "** MEETING with %? %^G\n
 :PROPERTIES:\n
 %U\n
 :END:\n"
@@ -383,7 +386,7 @@ you should place your code here."
 
         ("i" "idea" entry
          (file+headline org-default-notes-file "idea")
-          "* %? %^G\n
+          "** %? %^G\n
 :PROPERTIES:\n
 %U\n%a\n
 :END:\n"
@@ -391,7 +394,7 @@ you should place your code here."
 
         ("n" "note" entry
          (file+headline org-default-notes-file "note")
-          "* %? %^G\n
+          "** %? %^G\n
 :PROPERTIES:\n
 %U\n%a\n
 :END:\n"
