@@ -299,7 +299,7 @@ you should place your code here."
 (global-set-key (kbd "\C-ca") 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
 
-(setq helm-ag-base-command "C:\\Users\\Dave\\bin\\ag --vimgrep")
+(setq helm-ag-base-command "~/bin/ag --vimgrep")
 ;; (setq projectile-project-search-path '("~/Documents/git/" "~/Dropbox/dev/git/"))
 ;; (setq projectile-known-projects '("~/Documents/git/" "~/Dropbox/dev/git/"))
 
