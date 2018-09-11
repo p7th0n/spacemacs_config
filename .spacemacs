@@ -324,6 +324,7 @@ you should place your code here."
                            "PLANNING(p)"
                            "|"
                            "DONE(d@!)"
+                           "READ(e!)"
                            "CANCELED(c!)"
                            "NONE(N)")))
 
