@@ -309,6 +309,9 @@ you should place your code here."
 ;;   (define-key magit-status-mode-map
 ;;     (kbd dotspacemacs-leader-key) spacemacs-default-map))
 
+;; Create new parent
+(setq org-refile-allow-creating-parent-nodes 'confirm)
+
 (setq org-refile-targets '((org-agenda-files . (:maxlevel . 3))))
 
 (setq org-todo-keywords '((sequence 
@@ -345,6 +348,7 @@ you should place your code here."
         ("org" . ?o)
         ("toread" . ?t)
         ("resource" . ?r)
+        ("note" . ?n)
         ))
 (setq org-capture-templates
       '(
