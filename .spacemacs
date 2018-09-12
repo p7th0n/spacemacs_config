@@ -287,6 +287,7 @@ you should place your code here."
 (require 'ibuffer)
 (global-set-key "\C-x\C-b" 'ibuffer)
 
+(spacemacs/set-leader-keys "ma" 'org-archive-subtree)
 (spacemacs/set-leader-keys "mb" 'ibuffer)
 (spacemacs/set-leader-keys "mr" 'org-refile)
 (spacemacs/set-leader-keys "oc" 'org-capture)
@@ -343,6 +344,7 @@ you should place your code here."
         ("@home" . ?h)
         ("computer" . ?c)
         ("deerhub" . ?d)
+        ("meeting" . ?m)
         ("wdma" . ?w)
         ("urgent" . ?u)
         ("org" . ?o)
