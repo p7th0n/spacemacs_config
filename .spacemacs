@@ -285,12 +285,18 @@ you should place your code here."
 ;; Dired-like browser for buffers?
 ;; https://emacs.stackexchange.com/questions/29650/dired-like-browser-for-buffers
 (require 'ibuffer)
+
+;;
+;; custom key maps
+;;
+
 (global-set-key "\C-x\C-b" 'ibuffer)
 
 (spacemacs/set-leader-keys "ma" 'org-archive-subtree)
 (spacemacs/set-leader-keys "mb" 'ibuffer)
 (spacemacs/set-leader-keys "mr" 'org-refile)
 (spacemacs/set-leader-keys "oc" 'org-capture)
+(spacemacs/set-leader-keys "or" 'org-mode-restart)
 
 (global-set-key "\C-c o" (find-file "~/Dropbox/Notes/inbox.org"))
 
@@ -300,6 +306,8 @@ you should place your code here."
 (global-set-key (kbd "\C-ca") 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
 
+(org-update-checkbox-count t)
+(setq org-hierarchical-todo-statistics nil)
 (setq helm-ag-base-command "~/bin/ag --vimgrep")
 ;; (setq projectile-project-search-path '("~/Documents/git/" "~/Dropbox/dev/git/"))
 ;; (setq projectile-known-projects '("~/Documents/git/" "~/Dropbox/dev/git/"))
@@ -309,11 +317,6 @@ you should place your code here."
 ;; (with-eval-after-load 'magit
 ;;   (define-key magit-status-mode-map
 ;;     (kbd dotspacemacs-leader-key) spacemacs-default-map))
-
-;; Create new parent
-(setq org-refile-allow-creating-parent-nodes 'confirm)
-
-(setq org-refile-targets '((org-agenda-files . (:maxlevel . 3))))
 
 (setq org-todo-keywords '((sequence 
                            "TODO(t)"
@@ -332,10 +335,15 @@ you should place your code here."
                            "CANCELED(c!)"
                            "NONE(N)")))
 
-(setq org-directory "~/Dropbox/Notes/")
-(setq org-agenda-files (list "~/Dropbox/Notes/"))
+(setq org-directory "~/Dropbox/Notes")
+(setq org-agenda-files `("~/Dropbox/Notes"))
 (setq org-default-notes-file "~/Dropbox/Notes/Notes.org")
 ;; (setq org-archive-location "::* Archived Tasks")
+
+;; Create new parent
+(setq org-refile-allow-creating-parent-nodes 'confirm)
+(setq org-refile-targets '((org-agenda-files . (:maxlevel . 3))))
+
 (setq org-log-into-drawer "LOGBOOK")
 
 (setq org-tag-persistent-alist
