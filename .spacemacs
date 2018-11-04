@@ -299,7 +299,9 @@ you should place your code here."
 (spacemacs/set-leader-keys "ma" 'org-archive-subtree)
 (spacemacs/set-leader-keys "mb" 'ibuffer)
 (spacemacs/set-leader-keys "mc" 'org-update-statistics-cookies)
+(spacemacs/set-leader-keys "ml" 'org-toggle-link-display)
 (spacemacs/set-leader-keys "mr" 'org-refile)
+
 (spacemacs/set-leader-keys "oc" 'org-capture)
 (spacemacs/set-leader-keys "or" 'org-mode-restart)
 
